@@ -15,7 +15,6 @@ class UsersController < ApplicationController
   def register_user_card
     vendor = Vendor.create(vendor_params)
     render :register_user_address unless vendor
-    @card = CreditCard.new
   end
 
   def register_user_complete
