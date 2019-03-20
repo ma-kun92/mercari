@@ -11,7 +11,6 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.item_images.build
-    gon.image = @item.item_images
   end
 
   def create
@@ -41,6 +40,7 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.where('name LIKE(?)',"%#{params[:keyword]}%")
+
   end
 
 
