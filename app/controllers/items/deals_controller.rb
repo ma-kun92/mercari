@@ -13,9 +13,11 @@ class Items::DealsController < ApplicationController
     if charge.paid
       Deal.create(status: :paid, user_id: current_user.id, item_id: params[:item_id])
       # @item.update(user_id: current_user.id) itemも更新する仕様なら追加
+      flash[:notice] = "商品購入が完了しました"
       redirect_to action: :done
     else
-      redirect_to action: :new, notice: "購入が正しく行われませんでした。"
+      flash[:alert] = "購入が正しく行われませんでした"
+      redirect_to action: :new
     end
   end
 

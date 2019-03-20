@@ -3,62 +3,64 @@
   .item-show-main
     %h2.item-show-main-name=@item.name
     .item-show-main__container
-      .item-show-main__container--image
-        =image_tag(@images[0].image,class:'top-image')
-        .bottom-image
-          -@images.each_with_index do |image,i|
-            =image_tag(image.image,class:'bottom-image-little',value:i)
-      .item-show-main__container--table
-        %table
-          %tbody
-            %tr
-              %th 出品者
-              %td
-                = link_to @item.vendor.user.nickname, "/"
-                .rate-container
-                  .rate-container-box
-                    .good-icon
-                      = fa_icon "smile-o"
-                    .good.int  151
-                  .rate-container-box
-                    .normal-icon
-                      = fa_icon "meh-o"
-                    .normal.int 2
-                  .rate-container-box
-                    .bad-icon
-                      = fa_icon "frown-o"
-                    .bad.int 0
-            %tr
-              %th カテゴリー
-              %td
-                = link_to @item.category.root.name, "/"
-                %br
-                = link_to ">#{@item.category.parent.name}", "/"
-                %br
-                = link_to ">#{@item.category.name}", "/"
-            %tr
-              %th ブランド
-              %td
-                = link_to @item.brand, "/"
-            %tr
-              %th 商品のサイズ
-              %td=@item.size.name
-            %tr
-              %th 商品の状態
-              %td=@item.condition
-            %tr
-              %th 配送料の負担
-              %td=@item.shipping_fee
-            %tr
-              %th 配送の方法
-              %td=@item.shipping_method
-            %tr
-              %th 配送元地域
-              %td
-                = link_to @item.prefecture.name,"/"
-            %tr
-              %th 発送日の目安
-              %td=@item.shipping_date
+      .item-show-main__container--image.slider
+        -@images.each do |image|
+          =image_tag(image.image,class:'top-image')
+      .clearfix
+      .bottom-image.thumb
+        -@images.each do |image|
+          =image_tag(image.image,class:'bottom-image-little')
+    .item-show-main__container--table
+      %table
+        %tbody
+          %tr
+            %th 出品者
+            %td
+              = link_to @item.vendor.user.nickname, "/"
+              .rate-container
+                .rate-container-box
+                  .good-icon
+                    = fa_icon "smile-o"
+                  .good.int  151
+                .rate-container-box
+                  .normal-icon
+                    = fa_icon "meh-o"
+                  .normal.int 2
+                .rate-container-box
+                  .bad-icon
+                    = fa_icon "frown-o"
+                  .bad.int 0
+          %tr
+            %th カテゴリー
+            %td
+              = link_to @item.category.root.name, "/"
+              %br
+              = link_to ">#{@item.category.parent.name}", "/"
+              %br
+              = link_to ">#{@item.category.name}", "/"
+          %tr
+            %th ブランド
+            %td
+              = link_to @item.brand, "/"
+          %tr
+            %th 商品のサイズ
+            %td=@item.size.name
+          %tr
+            %th 商品の状態
+            %td=@item.condition_i18n
+          %tr
+            %th 配送料の負担
+            %td=@item.shipping_fee_i18n
+          %tr
+            %th 配送の方法
+            %td=@item.shipping_method_i18n
+          %tr
+            %th 配送元地域
+            %td
+              = link_to @item.prefecture.name,""
+          %tr
+            %th 発送日の目安
+            %td=@item.shipping_date_i18n
     .clearfix
     .item-show-main__price
       .price="¥#{@item.price.to_s(:delimited)}"
@@ -71,7 +73,7 @@
         = link_to "購入画面に進む",new_user_session_path
     .item-show-main__description
       =@item.description
-    -unless @item.vendor_id == current_user.id
+    -if user_signed_in? && @item.vendor.user != current_user.id
       .item-show-main__other
         .left-btn
           = link_to "/" do
@@ -85,7 +87,7 @@
           = link_to "/" do
             = fa_icon "lock"
             あんしん・あんぜんへの取り組み
-  -if @item.vendor_id == current_user.id
+  -if user_signed_in? && @item.vendor_id == current_user.id
     .item-show__vendor-menu
       .item-show__vendor-menu__edit.btn
         =link_to("商品の編集",edit_item_path(params[:id]))
@@ -107,9 +109,9 @@
                 = link_to "キャンセル",item_path,class: "modalClose"
               .delete-select-decision
                 = link_to "削除する",item_path,method: :delete
-  .item-show-comment
-    =render partial:'items/item-negotiation',collection: @comments,as: :comment
-    -if user_signed_in?
+  -if user_signed_in?
+    .item-show-comment
+      =render partial:'items/item-negotiation',collection: @comments,as: :comment
       %p 相手のことを考え丁寧なコメントを心がけましょう。不快な言葉遣いなどは利用制限や退会処分となることがあります。
       =form_for [@item,@comment] do |f|
         =f.text_area :comment,class:'textarea'

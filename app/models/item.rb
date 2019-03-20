@@ -1,6 +1,6 @@
-
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :user
   belongs_to :vendor
   belongs_to_active_hash :prefecture
   # belongs_to :brand
@@ -50,5 +50,4 @@ class Item < ApplicationRecord
     within_3days: 1,
     within_7days: 2
   }
-
 end
