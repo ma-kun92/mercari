@@ -5,7 +5,7 @@ $(function(){
     $('.confirm').addClass('no-display');
     $('#checkmark').addClass('no-display');
     $('.next-text').addClass('no-display');
-    $('.next').addClass('no-display');
+    $('.next_form').addClass('no-display');
     $('.register-header').addClass('no-display');
   });
 });

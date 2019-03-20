@@ -2,7 +2,6 @@ class RegistrationsController < Devise::RegistrationsController
 
   before_action :header_menu,only: [:edit,:new]
 
-
   def new
     super
   end
@@ -24,6 +23,7 @@ class RegistrationsController < Devise::RegistrationsController
 
   private
   def after_sign_up_path_for(resource)
+    flash.delete(:notice)
     new_vendor_path
   end
 

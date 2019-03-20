@@ -7,17 +7,14 @@ Rails.application.routes.draw do
   resources :users, only: [:index, :edit, :update] do
     collection do
       resource :card, except: [:edit, :update], module: "users"
-      resource :street_addresses
-      resource :vendor
-      post 'update_profile'
+      resource :street_address, only: [ :new, :create, :edit, :update]
+      resource :vendor, only: [ :new, :create, :edit, :update]
       get 'register_user_top'
-      post 'register_user_tel'
-      get 'register_user_address'
-      post 'register_user_card'
       get 'logout'
     end
   end
   resources :items do
+    resources :item_comments,only: [:create]
     resource :deal, only: [:new, :create], module: "items" do
       resource :card, except: [:edit, :update], module: "deals"
       collection do

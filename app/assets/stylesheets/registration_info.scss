@@ -140,6 +140,16 @@
           }
           .last{
               height: 180px;
+              span{
+                font-size: 14px;
+                padding-bottom: 8px;
+                font-weight: 600;
+                color: black;
+                vertical-align: middle;
+                background-color: white;
+                margin: 0;
+                padding: 0;
+              }
             }
           }
         .confirm-tel{
@@ -248,6 +258,7 @@
         height:45px;
         color: #888;
         margin: 8px 0 0;
+        padding-top: 10px;
         line-height: 1.5;
         margin-bottom: 30px;
       }
@@ -257,7 +268,7 @@
         text-align: center;
         margin-bottom: 8px;
       }
-      .next{
+      .next_form{
         background: #ea352d;
         border: 1px solid #ea352d;
         color: #fff;

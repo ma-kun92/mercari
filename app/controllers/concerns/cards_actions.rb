@@ -1,4 +1,3 @@
-
 module CardsActions
   extend ActiveSupport::Concern
 

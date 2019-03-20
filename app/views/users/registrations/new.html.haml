@@ -1,6 +1,6 @@
 =render partial: '/users/shared/users_register'
 .register-main
-  %h2.register-header
+  %h2.register-header.second_header
     会員情報入力
   .register-main__content
     = form_for(resource, as: resource_name, url: user_registration_path) do |f|
@@ -64,21 +64,18 @@
           %span 必須
           %br/
           = f.text_field :first_name_phonetic, autofocus: true, autocomplete: "first_name_phonetic",placeholder:'アヤ'
-        .field
-
         .field.last
           = f.label '生年月日'
           %span 必須
           %br/
           = f.collection_select :birth_year, Year.all, :id, :name, include_blank: '--'
-          = f.label :birth_year, "年"
+          %span.label 年
           %br/
           = f.collection_select :birth_month, Month.all, :id, :name, include_blank: '--'
-          = f.label :birth_month,"月"
+          %span.label 月
           %br/
-          .box
-            = f.collection_select :birth_day, Day.all, :id, :name, include_blank: '--'
-            = f.label :birth_day,"日"
+          = f.collection_select :birth_day, Day.all, :id, :name, include_blank: '--'
+          %span.label 日
       %p.confirm
         ※ 本人情報は正しく入力してください。
         %br/
@@ -88,9 +85,8 @@
         私はロボットではありません
       %p.next-text
         「次へ進む」のボタンを押すことにより、利用規約に同意したものとみなします
-      %input.next{type: "button", value: "次へ"}/
+      %input.next_form{type: "button", value: "次へ"}/
       .confirm-tel.no-display
-        %h3.head 電話番号確認
         .confirm-tel__content
           .form__up
             %h3 電話番号
@@ -107,6 +103,4 @@
             =link_to '電話番号から再入力する','#'
             %p.last
               SMSが届かない場合はSMS受信設定を確認してください
-          .actions
-            = f.submit "次へ進む", class: 'first-commit'
-=render partial: 'users/shared/footer'
+= render partial:'/shared/subFooter'
