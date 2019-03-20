@@ -1,5 +1,7 @@
 class VendorsController < ApplicationController
   before_action :header_menu,only: [:edit]
+  add_breadcrumb 'メルカリ', :root_path
+  add_breadcrumb 'マイページ', :users_path
 
   def new
     @vendor = Vendor.new
@@ -21,6 +23,7 @@ class VendorsController < ApplicationController
     else
       @vendor = Vendor.new
     end
+    add_breadcrumb '発送元・お届け先住所変更', :edit_vendor_path
   end
 
   def update

@@ -1,8 +1,11 @@
 class StreetAddressesController < ApplicationController
   before_action :header_menu,only: [:new,:edit]
+  add_breadcrumb 'メルカリ', :root_path
+  add_breadcrumb 'マイページ', :users_path
 
   def new
     @street_address = StreetAddress.new
+    add_breadcrumb '本人情報の登録', :new_street_address_path
   end
 
   def create
@@ -20,6 +23,7 @@ class StreetAddressesController < ApplicationController
     else
       @street_address = StreetAddress.new
     end
+    add_breadcrumb '発送元・お届け先住所変更', :edit_street_address_path
   end
 
   def update
