@@ -1,6 +1,6 @@
-
 class Item < ApplicationRecord
   extend ActiveHash::Associations::ActiveRecordExtensions
+  # # belongs_to :user
   belongs_to :vendor
   belongs_to_active_hash :prefecture
   # belongs_to :brand
@@ -8,8 +8,8 @@ class Item < ApplicationRecord
   belongs_to :category
   has_many :item_images,dependent: :destroy
   accepts_nested_attributes_for :item_images
-  has_many :item_comments,dependent: :destroy
-  has_one :deal
+  # has_many :item_comments,dependent: :destroy
+  # has_one :deal
 
   validates :name, presence: true, length: { maximum: 40 }
   validates :description, presence: true, length: { maximum: 1000 }
@@ -50,5 +50,4 @@ class Item < ApplicationRecord
     within_3days: 1,
     within_7days: 2
   }
-
 end
