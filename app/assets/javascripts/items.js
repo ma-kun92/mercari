@@ -37,4 +37,6 @@ $(function(){
     plus_menu.css('display','none');
     $(this).css('background','#fff');
   });
+
+  $('.slider').slick()
 });
