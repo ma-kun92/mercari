@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190320070241) do
+ActiveRecord::Schema.define(version: 20190321073049) do
 
   create_table "brands", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -67,12 +67,10 @@ ActiveRecord::Schema.define(version: 20190320070241) do
     t.string   "brand"
     t.integer  "size_id"
     t.integer  "category_id"
-    t.integer  "user_id"
     t.integer  "vendor_id"
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.index ["category_id"], name: "index_items_on_category_id", using: :btree
-    t.index ["user_id"], name: "index_items_on_user_id", using: :btree
     t.index ["vendor_id"], name: "index_items_on_vendor_id", using: :btree
   end
 
@@ -109,25 +107,25 @@ ActiveRecord::Schema.define(version: 20190320070241) do
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "nickname",                                          null: false
+    t.string   "nickname",                                                                  null: false
     t.string   "tellphone"
-    t.string   "family_name",                                       null: false
-    t.string   "first_name",                                        null: false
-    t.string   "family_name_phonetic",                              null: false
-    t.string   "first_name_phonetic",                               null: false
-    t.integer  "birth_year",                                        null: false
-    t.integer  "birth_month",                                       null: false
-    t.integer  "birth_day",                                         null: false
-    t.string   "icon"
+    t.string   "family_name",                                                               null: false
+    t.string   "first_name",                                                                null: false
+    t.string   "family_name_phonetic",                                                      null: false
+    t.string   "first_name_phonetic",                                                       null: false
+    t.integer  "birth_year",                                                                null: false
+    t.integer  "birth_month",                                                               null: false
+    t.integer  "birth_day",                                                                 null: false
+    t.string   "icon",                                 default: "member_photo_noimage.png"
     t.text     "profile",                limit: 65535
     t.string   "invitation_code"
-    t.string   "email",                                default: "", null: false
-    t.string   "encrypted_password",                   default: "", null: false
+    t.string   "email",                                default: "",                         null: false
+    t.string   "encrypted_password",                   default: "",                         null: false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.datetime "created_at",                                        null: false
-    t.datetime "updated_at",                                        null: false
+    t.datetime "created_at",                                                                null: false
+    t.datetime "updated_at",                                                                null: false
     t.string   "payjp_id"
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
@@ -169,7 +167,6 @@ ActiveRecord::Schema.define(version: 20190320070241) do
   add_foreign_key "item_comments", "items"
   add_foreign_key "item_comments", "users"
   add_foreign_key "items", "categories"
-  add_foreign_key "items", "users"
   add_foreign_key "items", "vendors"
   add_foreign_key "social_profiles", "users"
   add_foreign_key "street_addresses", "users"

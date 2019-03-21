@@ -15,10 +15,6 @@
   img{
     vertical-align: middle;
   }
-  .text-center{
-    text-align:center;
-    @include clearfix;
-  }
   .inner{
     width:1020px;
     margin: 0 auto;

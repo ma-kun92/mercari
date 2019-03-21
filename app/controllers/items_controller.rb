@@ -32,7 +32,7 @@ class ItemsController < ApplicationController
     sold_item = Deal.pluck('item_id')
     @vendor_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
     @brand_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(brand:@item.brand).order(id: :DESC).limit(6)
-    add_breadcrumb @item.name, :item_path
+    add_breadcrumb @item.name, "items/#{@item.id}"
   end
 
   def image
@@ -40,9 +40,13 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.where('name LIKE(?)',"%#{params[:keyword]}%")
-
   end
 
+  def destroy
+    item = Item.find(params[:id])
+    item.destroy if item.vendor_id == current_user.id
+    redirect_to users_path
+  end
 
   def edit
     @item.item_images.build

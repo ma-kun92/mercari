@@ -11,7 +11,7 @@ class VendorsController < ApplicationController
   def create
     vendor = Vendor.new(create_params)
     if vendor.save
-      redirect_to new_card_path
+      redirect_to "/users/registrations/card/new"
     else
       render action: 'new'
     end
