@@ -13,7 +13,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[facebook  google_oauth2]
 
   has_one :street_address,dependent: :destroy
-  has_one :credit_card,dependent: :destroy
   has_one :vendor, dependent: :destroy
   has_many :item_comments, dependent: :destroy
   has_many :valuations
