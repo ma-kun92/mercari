@@ -12,7 +12,7 @@
               %br
               登録されたお名前・生年月日を変更する場合、本人確認書類の提出が必要になります。
             = link_to '本人確認書類のアップロードについて＞','#'
-            = form_for @street_address do |f|
+            = form_for @street_address, url: street_address_path do |f|
               = label :family_name, 'お名前'
               %p
                 = user_name

@@ -96,7 +96,7 @@
           %span
             >
       %li
-        = link_to '#' do
+        = link_to new_card_path do
           支払い方法
           %span
             >
@@ -106,7 +106,7 @@
           %span
             >
       %li
-        = link_to edit_street_addresses_path do
+        = link_to edit_street_address_path do
           本人情報
           %span
             >
@@ -120,7 +120,7 @@
           ログアウト
           %span
             >
-%a.icon-camera
+.icon-camera
   .icon-camera__box
-    = image_tag ("camera01.png")
+    =link_to(image_tag("camera01.png"),new_item_path)
 

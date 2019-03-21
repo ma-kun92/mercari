@@ -53,7 +53,9 @@ $(function(){
       $("label.sell-dropbox-uploader-container").attr('for','item_image'+ i_count);
     }
   });
-
+  $('#drop').change(function(){
+    $('pre').hide();
+  })
   // ここから連動プルダウン
 
   // var parent_val = null

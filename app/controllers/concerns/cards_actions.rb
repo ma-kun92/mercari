@@ -1,12 +1,5 @@
-<<<<<<< HEAD:app/controllers/cards_controller.rb
-class CardsController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :new, :create, :destroy]
-  before_action :prepare_payjp, only: [:show, :new, :create, :destroy]
-  before_action :header_menu,only: [:new,:show]
-=======
 module CardsActions
   extend ActiveSupport::Concern
->>>>>>> ma-kun92/master:app/controllers/concerns/cards_actions.rb
 
   def show
   end
@@ -18,12 +11,14 @@ module CardsActions
   def create
     token = params[:token]
     @customer.cards.create(card: token) if @customer.cards.count == 0
-    redirect_to action: :show, notice: "カードが登録されました。"
+    flash[:notice] = "カードが登録されました"
+    redirect_to action: :show
   end
 
   def destroy
     @card.delete
-    redirect_to action: :show, notice: "カード情報が削除されました。"
+    flash[:notice] = "カード情報が削除されました"
+    redirect_to action: :show
   end
 
   private

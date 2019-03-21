@@ -4,7 +4,7 @@
       %h2 クレジットカード情報入力
     .card-main__content
       = form_tag({action: :create}, {method: :post, class: "card-main__content__add-card"}) do
-        .card-main__content__add-card--general-error
+        %ul.card-main__content__add-card--general-error
         .card-main__content__add-card__number
           = label :number, 'カード番号'
           %span.requierd 必須
@@ -39,7 +39,7 @@
         .card-main__content__add-card__cvc
           = label :cvc, 'セキュリティーコード'
           %span.requierd 必須
-          = text_field_tag :cvc, "",  placeholder: 'カード背面4桁もしくは3桁の番号', maxlength: "3"
+          = text_field_tag :cvc, "",  placeholder: 'カード背面4桁もしくは3桁の番号', maxlength: "4"
           %ul.card-main__content__add-card__cvc--error
           .card-main__content__add-card__cvc--text
             カード裏面の番号とは

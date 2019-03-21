@@ -4,7 +4,7 @@
     .my-container-main__center
       %a.icon-link{ href: "#"}
         .mypage-user-icon
-          %img{ src: "assets/member_photo_noimage.png"}
+          = image_tag("member_photo_noimage.png")
           %h2
             = user_name
           .my-number
@@ -65,4 +65,4 @@
                 item2
     = render partial: 'users/shared/users_sidebar'
 = render partial: 'users/shared/users_bottom_banner'
-= render partial: 'shared/footer'
+= render partial:'/shared/subFooter'

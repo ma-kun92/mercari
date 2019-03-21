@@ -108,7 +108,7 @@
         left:0;
         position:absolute;
         top:50%;
-        transform:translate(0,-50%);      //これなに？
+        transform:translate(0,-50%);
         h2{
           font-size: 24px;
           text-shadow: 0 0 5px rgba(0,0,0,0.4);
@@ -154,6 +154,19 @@
         img{
           width:100%;
         }
+      }
+    }
+  }
+  .icon-camera{
+    position: fixed;
+    bottom:32px;
+    right: 32px;
+    display: inline-block;
+    a{
+      img{
+        border-radius: 80px;
+        height: 160px;
+        width: 160px;
       }
     }
   }

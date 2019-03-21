@@ -6,9 +6,7 @@
     = csrf_meta_tags
     = include_gon
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
-    = include_gon
+    %script{:src => "http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"}
     = javascript_include_tag 'https://js.pay.jp', 'application', 'data-turbolinks-track': 'reload'
   %body
-    - flash.each do |key, value|
-      = content_tag(:div, value, class: "#{key}")
     = yield

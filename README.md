@@ -40,6 +40,7 @@ Things you may want to cover:
 |icon|string|
 |profile|text|
 |invitation_code|string|
+|payjp_id|string|default: null|
 ### Association
 - has_one :street_address,dependent: :destroy
 - has_one :credit_card,dependent: :destroy
@@ -68,29 +69,12 @@ Things you may want to cover:
 - belongs_to :user
 - belongs_to_active_hash :prefecture
 
-## credit_cards
-|Column|Type|Options|
-|------|----|-------|
-|card_number|string|null: false|
-|month|integer|null: false|
-|year|integer|null: false|
-|security_code|string|null: false|
-|user_id|references|foreign_key: true|
-
-### Association
-- belongs_to :user
-
 ## social_profiles
 |Column|Type|Options|
 |------|----|-------|
 |user_id|references|foreign_key: true|
 |provider|string|null: false|
 |uid|string|null: false|
-|access_token|string|
-|access_secret|string|
-|name|string|
-|email|string|
-|image_url|string|
 ### Association
 - belongs_to :user
 
@@ -141,7 +125,6 @@ Things you may want to cover:
 |size_id|integer|
 |prefecture_id|integer|null: false|
 |brand|string|
-|user_id|references|foreign_key: true|
 |vendor_id|references|foreign_key: true|
 
 ### Association
