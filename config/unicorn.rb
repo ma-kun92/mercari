@@ -1,4 +1,5 @@
-app_path = File.expand_path('../../../', __FILE__)
+# app_path = File.expand_path('../../../', __FILE__)
+app_path = '~/var/www/mercari'
 working_directory "#{app_path}/current"
 listen "#{app_path}/shared/tmp/sockets/unicorn.sock"
 pid "#{app_path}/shared/tmp/pids/unicorn.pid"
@@ -36,6 +37,6 @@ before_fork do |server, worker|
   end
 end
 
-after_fork do |server, worker|
+after_fork do |_server, _worker|
   defined?(ActiveRecord::Base) && ActiveRecord::Base.establish_connection
 end
