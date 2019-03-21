@@ -116,7 +116,6 @@ $(function(){
     //sizeboxに選択肢を入れる
     select_size.append(html);
   }
-  console.log(result_size_type)
       if(result_size_type == 100){
         size_box.hide();
       }else{
