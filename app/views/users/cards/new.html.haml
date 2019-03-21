@@ -2,6 +2,6 @@
 .my-container
   .my-container-main
     .my-container-main__center
-      =render partial: "shared/cards/new"
+      =render partial: "shared/cards/new", locals: {submit_info: "追加する"}
     = render partial: 'users/shared/users_sidebar'
 = render partial: 'shared/footer'
