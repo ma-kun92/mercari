@@ -1,8 +1,6 @@
 $(function(){
-
   var upload_image = $(".sell-dropbox-items");
   var i_count = 1;
-
   function get_image(image) {
     var html = `<li class="sell-upload-item">
                   <img src="${image}" alt="画像">
@@ -57,9 +55,6 @@ $(function(){
     $('pre').hide();
   })
   // ここから連動プルダウン
-
-  // var parent_val = null
-
   // 呼び出し元に、選択された値に紐づくカテだけを返す
   function compare(category, value){
     results = category.filter(function(e){
@@ -71,7 +66,10 @@ $(function(){
     return results
   }
 
-  function middle_choices(large_results,select_middle){
+  function middle_choices(large_results,select_middle,select_small){
+    select_middle.empty();
+    select_small.empty();
+     select_middle.append(`<option>---</option>`)
     large_results.forEach(function(result){
       var html = `<option value="${result.id}"size_type_id="${result.size_type_id}" >
                     ${result.name}
@@ -82,6 +80,8 @@ $(function(){
   }
 
   function small_choices(select_small, large_val, middle_val){
+    select_small.empty();
+    select_small.append(`<option>---</option>`)
     //smallの定義（ancestry)
     var category_value = `${large_val}/${middle_val}`
     //紐づいたsmall要素だけresultsに代入
@@ -109,12 +109,19 @@ $(function(){
   function size_choices(result_size_type,select_size,size_all){
     size_all.forEach(function(result){
       var size_all_type_id = result.size_type_id
-      if(result_size_type == size_all_type_id)
+      if(result_size_type == size_all_type_id){
         var html = `<option value="${result.id}" >
                   ${result.name}
                  </option>`
     //sizeboxに選択肢を入れる
     select_size.append(html);
+  }
+  console.log(result_size_type)
+      if(result_size_type == 100){
+        size_box.hide();
+      }else{
+        size_box.show();
+      }
     });
   };
   var select_large = $('.large-category');
@@ -138,7 +145,7 @@ $(function(){
     }
     var large_results = compare(gon.middle, large_val)
     // largeに紐づくmiddleカテをmiddleboxの選択肢として加える
-    middle_choices(large_results,select_middle);
+    middle_choices(large_results,select_middle,select_small);
   });
 
     // middleが変わったら発動
@@ -166,7 +173,6 @@ $(function(){
     if ($.isEmptyObject(small_val)){
       size_box.hide();
       } else {
-      size_box.show();
       brand_box.show();
     }
   });
@@ -184,5 +190,22 @@ $(function(){
       $(".right").text('¥ ' + fee);
       $(".profits-form").text('¥ ' + profits);
     }
+  });
+
+  function validate_email(ele){
+      let error; // エラー用の変数を定義
+      if( error ) {
+        if( !ele.next('p.error').length ) {
+          //この要素の後続に<p class="error">要素が存在しない場合
+          ele.after('<p class="error" style="color: red">必須 or 入力に間違いがあります</p>');
+          //この要素の後にエラーメッセージを挿入
+        }
+      } else {
+        // エラーがなかった場合、もしくはエラー後に正しい入力を行なった場合
+        ele.next('p.error').remove(); // この要素の後続要素を削除
+      }
+  }
+  $('#item_name').on('blur', function(){
+    validate_email($(this))
   });
 });
