@@ -43,7 +43,7 @@ $(function(){
       // 読み込み完了時のイベント
       fileReader.onload = function (e) {
       //e.target.result
-        get_image(e.target.result,i_count);
+        get_image(e.target.result);
       }
       // 読み込み実行readAsDataURL()は、FileReaderのメソッド
       fileReader.readAsDataURL(this.files[i]);
