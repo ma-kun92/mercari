@@ -6,11 +6,13 @@
       %ul.progressbar
         %li.active
           会員情報
-        %li
+        %li.active
           電話番号認証
-        %li
+        %li.active
           お届け先住所入力
         %li
           支払い方法
         %li
           完了
+=render partial: "shared/cards/new", locals: {submit_info: "次へ進む"}
+=render partial: "shared/subFooter"
