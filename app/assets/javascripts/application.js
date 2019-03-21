@@ -19,9 +19,10 @@
 //= require item_delete_modal
 //= require item_new
 //= require items
-//= require items_show
 //= require register_top_to_second
 //= require remove_facebook_redirect_url
-//= require slick.min.js
 //= require user_registration
 //= require users_show
+//= require slick.min.js
+//= require items_show
+//= require categories_search

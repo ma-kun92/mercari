@@ -6,8 +6,8 @@
           box-sizing: border-box;
 }
 
-@mixin clearfix {
-  &::after {
+@mixin clearfix{
+  &::after{
     content: "";
     display: block;
     clear: both;
