@@ -190,21 +190,4 @@ $(function(){
       $(".profits-form").text('¥ ' + profits);
     }
   });
-
-  function validate_email(ele){
-      let error; // エラー用の変数を定義
-      if( error ) {
-        if( !ele.next('p.error').length ) {
-          //この要素の後続に<p class="error">要素が存在しない場合
-          ele.after('<p class="error" style="color: red">必須 or 入力に間違いがあります</p>');
-          //この要素の後にエラーメッセージを挿入
-        }
-      } else {
-        // エラーがなかった場合、もしくはエラー後に正しい入力を行なった場合
-        ele.next('p.error').remove(); // この要素の後続要素を削除
-      }
-  }
-  $('#item_name').on('blur', function(){
-    validate_email($(this))
-  });
 });
