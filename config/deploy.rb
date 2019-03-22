@@ -7,6 +7,8 @@ set :repo_url, "git@github.com:ma-kun92/mercari.git"
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'vendor/bundle', 'public/system', 'public/uploads')
 
 set :default_env, {
+  PAY_PK_test: ENV["PAYJP_PK_TEST"] ,
+  pay_sk_test: ENV["PAYJP_SK_TEST"],
   rbenv_root: "/usr/local/rbenv",
   path: "/usr/local/rbenv/shims:/usr/local/rbenv/bin:$PATH",
   AWS_ACCESS_KEY_ID: ENV["AWS_ACCESS_KEY_ID"],
@@ -17,6 +19,8 @@ set :linked_files, %w{ config/secrets.yml }
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
+
+
 
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/tech45.pem']
