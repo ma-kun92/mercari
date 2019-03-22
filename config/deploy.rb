@@ -14,7 +14,6 @@ set :default_env, {
 }
 
 set :linked_files, %w{ config/secrets.yml }
-set :linked_files, %w{ .env }
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
@@ -35,14 +34,11 @@ namespace :deploy do
   end
 
   desc 'upload secrets.yml'
-  desc 'upload .env'
   task :upload do
     on roles(:app) do |host|
       if test "[ ! -d #{shared_path}/config ]"
         execute "mkdir -p #{shared_path}/config"
       end
-      upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
-      upload!('.env', "#{shared_path}/config/.env")
     end
   end
   before :starting, 'deploy:upload'
