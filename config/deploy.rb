@@ -13,7 +13,7 @@ set :default_env, {
   AWS_SECRET_ACCESS_KEY: ENV["AWS_SECRET_ACCESS_KEY"]
 }
 
-set :linked_files, %w{ config/secrets.yml, .env }
+set :linked_files, %w{ config/secrets.yml }
 
 set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
@@ -38,6 +38,17 @@ namespace :deploy do
     on roles(:app) do |host|
       if test "[ ! -d #{shared_path}/config ]"
         execute "mkdir -p #{shared_path}/config"
+      end
+      upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
+    end
+  end
+  desc "Upload .env to the shared/config directory."
+  task :upload do
+    on roles(:app) do
+      unless test "[ -f #{shared_path}/config/.env ]"
+        unless test "[ -d #{shared_path}/config ]"
+          upload! ".env", "#{shared_path}/config/.env"
+        end
       end
     end
   end
