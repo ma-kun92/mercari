@@ -42,7 +42,7 @@ namespace :deploy do
         execute "mkdir -p #{shared_path}/config"
       end
       upload!('config/secrets.yml', "#{shared_path}/config/secrets.yml")
-      upload!('.env', "#{shared_path}/secrets.yml")
+      upload!('.env', "#{shared_path}/.env")
     end
   end
   before :starting, 'deploy:upload'
