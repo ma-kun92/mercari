@@ -6,6 +6,7 @@ class ItemsController < ApplicationController
   add_breadcrumb 'メルカリ', :root_path, except: [:index]
 
   def index
+    @categories = Category.roots
   end
 
   def new

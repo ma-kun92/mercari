@@ -39,7 +39,7 @@
           padding:9px 32px 9px 8px;
           background: #fafafa;
           border-radius:4px;
-          transition:all;           // コレ何？？
+          transition:all;
         }
         .icon-search{
           position:absolute;
@@ -167,19 +167,20 @@
                   background-size:320px 80px;
                   .user-icon{
                     img{
+                      display:block;
+                      margin:0 auto;
                       border-radius:30px;
                       width:60px;
                     }
                   }
-                  figcaption{
-                    margin:8px 0 0;
-                    padding:0 8px;
+                  .user-name{
+                    margin:8px auto;
+                    text-align:center;
                     font-size:16px;
                   }
                 }
                 .pc-header-mypage-review-listing{
-                  padding:8px 8px 0;
-                  font-size:0;
+                  margin:20px 8px 0;
                   text-align:center;
                   li{
                     display:inline-block;

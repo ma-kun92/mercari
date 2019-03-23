@@ -38,8 +38,10 @@ $(function(){
     $(this).css('background','#fff');
   });
 
-  $('.slider').slick({
-    arrows:false,
-    // asNavFor:'.thumb',
+  $('.slider_banner').slick({
+    arrows:true,
+    autoplay:true,
+    focusOnSelect:true,
+    dots:true,
   });
 });
