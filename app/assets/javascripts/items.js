@@ -38,5 +38,5 @@ $(function(){
     $(this).css('background','#fff');
   });
 
-  $('.slider').slick()
+  // $('.slider').slick();
 });
