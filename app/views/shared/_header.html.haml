@@ -11,22 +11,22 @@
       %nav.l-left
         %ul.pc-header-nav
           %li.switch
-            =link_to("カテゴリーから探す","",class:'pc-header-nav-root')
+            =link_to("カテゴリーから探す",categories_path,class:'pc-header-nav-root')
             %ul.large-category-wrap
               -l_category_define
               -@l_categories.each do |l_category|
                 %li.large-category.hover_red
-                  =link_to(l_category.name,"/")
+                  =link_to(l_category.name,category_path(l_category.id))
                   %ul.middle-category-wrap
                     -m_category_define(l_category)
                     -@m_categories.each do |m_category|
                       %li.middle-category.hover_grey
-                        =link_to(m_category.name,"/")
+                        =link_to(m_category.name,category_path(m_category.id))
                         %ul.small-category-wrap
                           -s_category_define(m_category)
                           -@s_categories.each do |s_category|
                             %li.small-category.hover_grey
-                              =link_to(s_category.name,"/")
+                              =link_to(s_category.name,category_path(s_category.id))
 
           %li.switch
             =link_to("ブランドから探す","",class:"pc-header-nav-root")
