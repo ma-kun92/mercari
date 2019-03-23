@@ -1,5 +1,6 @@
 class VendorsController < ApplicationController
   before_action :header_menu,only: [:edit]
+  before_action :authenticated_user!, only: [:new, :index]
   add_breadcrumb 'メルカリ', :root_path
   add_breadcrumb 'マイページ', :users_path
 
@@ -10,7 +11,7 @@ class VendorsController < ApplicationController
   def create
     vendor = Vendor.new(create_params)
     if vendor.save
-      redirect_to new_card_path
+      redirect_to "/users/registrations/card/new"
     else
       render action: 'new'
     end

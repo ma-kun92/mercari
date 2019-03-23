@@ -33,12 +33,12 @@
             .select
               %h3 カテゴリー
               %span 必須
-            .select-large
-              = f.collection_select :category_id,@large, :id, :name,{prompt: "---"},{class: "large-category"}
+            .select-large-edit
+              = f.collection_select :category_id,@large, :id, :name,{prompt: "---"},{class: "large-category-edit"}
             .select-middle-edit
-              = f.select :category_id, options_from_collection_for_select(@small.children, :id, :name, @middle.id), {class: "middle-category"}
+              = f.select :category_id, options_from_collection_for_select(@small.children, :id, :name, @middle.id), {class: "middle-category-edit"}
             .select-small-edit
-              = f.select :category_id, options_from_collection_for_select(@middle.children, :id, :name, @category.id), {class: "small-category"}
+              = f.select :category_id, options_from_collection_for_select(@middle.children, :id, :name, @category.id), {class: "small-category-edit"}
             .select-size-edit
               .select
                 %h3.size サイズ

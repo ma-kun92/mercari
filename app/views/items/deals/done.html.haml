@@ -12,22 +12,25 @@
     .deal-done__container__main
       .deal-done__container__main__item
         .deal-done__container__main__item--image
-          %img{src: "https://static-mercari-jp-imgtr2.akamaized.net/thumb/photos/m64038234554_1.jpg?1551520024"}
+          =image_tag(@image.image)
         .deal-done__container__main__item--name
           = @item.name
     .deal-done__container__price
       = "¥#{@item.price.to_s(:delimited)}"
       %span 送料込み
-    .deal-done__container__address
-      .deal-done__container__address__info
+    .deal-new__container__vendor
+      .deal-new__container__vendor__info
         %h3 配送先
-        %address
-          %p
-            = "〒#{@address.post_number}"
-          %p
-            = "#{@address.prefecture.name} #{@address.city} #{@address.address} #{@address.building_name}"
-          %p
+        - if @vendor
+          .deal-new__container__vendor__info--post_number
+            = "〒#{@vendor.post_number}"
+          .deal-new__container__vendor__info--address
+            = "#{@vendor.prefecture.name} #{@vendor.city} #{@vendor.address} #{@vendor.building_name}"
+          .deal-new__container__vendor__info--nickname
             = current_user.nickname
+        - else
+          .deal-new__container__vendor__info--none
+            %span /
     .deal-done__container__card
       .deal-done__container__card__info
         %h3 支払方法

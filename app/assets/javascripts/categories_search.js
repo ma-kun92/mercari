@@ -1,6 +1,7 @@
 $(function(){
   function link(link){
-    var position = $(`[link_id=${link}]`).offset().top;
+    if($(`[link_id=${link}]`).length){
+    var position = $(`[link_id=${link}]`).offset().top;}
     $(`#${link}`).on('click',function(){
       $('html,body').animate({
         scrollTop:position

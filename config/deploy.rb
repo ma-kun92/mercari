@@ -15,8 +15,11 @@ set :default_env, {
 
 set :linked_files, %w{ config/secrets.yml }
 
+
 set :rbenv_type, :user
 set :rbenv_ruby, '2.3.1'
+
+
 
 set :ssh_options, auth_methods: ['publickey'],
                   keys: ['~/.ssh/tech45.pem']
