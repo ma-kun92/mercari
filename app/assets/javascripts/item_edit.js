@@ -29,14 +29,14 @@ $(function(){
       e.dataTransfer.dropEffect = 'copy';
     });
 
-//     // ドロップ
-//     target.addEventListener('drop', function (e) {
-//       e.preventDefault();
-//       e.stopPropagation();
-//       //DataTransfer.files - ファイルの一覧
-//       document.getElementById('item-image-edit'+ i_count).files = e.dataTransfer.files;
-//     });
-//   }
+    // ドロップ
+    target.addEventListener('drop', function (e) {
+      e.preventDefault();
+      e.stopPropagation();
+      //DataTransfer.files - ファイルの一覧
+      document.getElementById('item-image-edit'+ i_count).files = e.dataTransfer.files;
+    });
+  }
 
 // ドロップ後 表示させとく
   $('.item-images-edit').on("change",function(e) {
