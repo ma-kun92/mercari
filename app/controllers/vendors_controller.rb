@@ -1,6 +1,6 @@
 class VendorsController < ApplicationController
   before_action :header_menu,only: [:edit]
-  before_action :authenticated_user!, only: [:new, :index]
+  before_action :authenticate_user!, only: [:new, :index]
   add_breadcrumb 'メルカリ', :root_path
   add_breadcrumb 'マイページ', :users_path
 
