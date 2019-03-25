@@ -61,7 +61,7 @@
           color: green;
           &:before{
             background-color: #55b776;
-            color:#fff;
+            color: #fff;
           }
           & + li:after {
           background-color: #55b776;
@@ -284,7 +284,9 @@
       }
     }
   }
-
+}
+.error-box{
+  margin-top: 40px;
 }
 .no-display{
   display: none;
