@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item,only: [:show,:update,:edit]
   before_action :set_js_params,only: [:new,:edit]
   before_action :move_to_index,only: [:new,:edit]
+  add_breadcrumb 'メルカリ', :root_path, except: [:index]
 
   def index
   end
@@ -10,7 +11,6 @@ class ItemsController < ApplicationController
   def new
     @item = Item.new
     @item.item_images.build
-    gon.image = @item.item_images
   end
 
   def create
@@ -32,6 +32,7 @@ class ItemsController < ApplicationController
     sold_item = Deal.pluck('item_id')
     @vendor_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
     @brand_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(brand:@item.brand).order(id: :DESC).limit(6)
+    add_breadcrumb @item.name, "items/#{@item.id}"
   end
 
   def image
