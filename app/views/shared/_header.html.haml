@@ -40,13 +40,13 @@
         .l-right
           %ul.pc-header-user-nav
             %li.switch
-              =link_to(image_tag(current_user.icon,class:'user-icon'),users_path,class:"pc-header-nav-root")
+              =link_to(image_tag("#",class:'user-icon'),users_path,class:"pc-header-nav-root")
               .mypage-title マイページ
               .mypage-box
                 .pc-header-mypage-state.text-center
                   .user-background
                     .user-icon
-                      =image_tag(current_user.icon)
+                      =image_tag("#")
                     %figcaption=current_user.nickname
                   %ul.pc-header-mypage-review-listing
                     %li
