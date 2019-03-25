@@ -1,16 +1,17 @@
 class VendorsController < ApplicationController
   before_action :header_menu,only: [:edit]
-  before_action :authenticated_user!, only: [:new, :index]
+  before_action :authenticate_user!, only: [:new, :index]
   add_breadcrumb 'メルカリ', :root_path
   add_breadcrumb 'マイページ', :users_path
+
 
   def new
     @vendor = Vendor.new
   end
 
   def create
-    vendor = Vendor.new(create_params)
-    if vendor.save
+    @vendor = Vendor.new(create_params)
+    if @vendor.save
       redirect_to "/users/registrations/card/new"
     else
       render action: 'new'
@@ -31,7 +32,7 @@ class VendorsController < ApplicationController
     if Vendor.update(create_params)
       redirect_to users_path
     else
-      render action: 'edit'
+      render action: 'edit',notice: '記述内容に不備があります'
     end
   end
 
