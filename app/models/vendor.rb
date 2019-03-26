@@ -10,7 +10,7 @@ class Vendor < ActiveRecord::Base
   validates :family_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/i }
   validates :first_name, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/i }
   validates :prefecture_id, presence: true
-  validates :city, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥]+\z/i }
+  validates :city, presence: true, format: { with: /\A[ぁ-んァ-ン一-龥ー]+\z/i }
   validates :address, presence: true
   validates :post_number, numericality: { only_integer: true }
   # validates :nickname, presence: true
