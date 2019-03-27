@@ -1,16 +1,9 @@
 = render partial:'shared/header'
 .items-index
   .top-banner
-    .top-banner__img-area
-      .top-banner__img-area__angle
-        =fa_icon("angle-left")
-        =fa_icon("angle-right")
-      .clearfix
-      .top-banner__img-area__page
-        .circle-box
-          =fa_icon("circle")
-          =fa_icon("circle")
-          =fa_icon("circle")
+    .top-banner__img-area.slider_banner
+      =image_tag('banner-new-life.jpg')
+      =image_tag('banner-bokurano-heisei.jpg')
   .pickup-container
     %h1 ピックアップカテゴリー
     =render partial:"items/new_items",collection: @pick_up_categories,as: :pick_up

@@ -33,7 +33,7 @@ private
   end
 
   def header_menu
-    @pick_up_categories = Category.where(pick_up:1)
+    @categories = Category.roots
     @pick_up_brands = Brand.where(pick_up:1)
   end
 
