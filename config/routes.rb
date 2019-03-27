@@ -24,6 +24,7 @@ Rails.application.routes.draw do
     end
     collection do
       get 'search'
+      get 'search_detail'
     end
   end
   resources :categories, only: [:index,:show]

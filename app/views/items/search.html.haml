@@ -1,15 +1,56 @@
 = render partial:'shared/header'
-- @items.each do |item|
-  =link_to item_path(item.id),class:'search-item-card' do
-    .item-card__image
-      =image_tag(item.item_images[0].image)
-    .item-card__information
-      .item-card__information__name=item.name
-      .item-card__information__detail
-        .price="¥#{item.price.to_s(:delimited)}"
-        -# like機能実装次第追加する
-        .likes
-          =fa_icon("heart-o")
-          15
-        .clearfix
-        .tax (税込)
+.search-item
+  .search-item-box
+    - @items.each do |item|
+      =link_to item_path(item.id),class:'search-item-card' do
+        .item-card__image
+          =image_tag(item.item_images[0].image)
+        .item-card__information
+          .item-card__information__name=item.name
+          .item-card__information__detail
+            .price="¥#{item.price.to_s(:delimited)}"
+            / like機能実装次第追加する
+            .likes
+              =fa_icon("heart-o")
+              15
+            .clearfix
+          .tax (税込)
+  .detail-search
+    .detail-search__box
+      = search_form_for @query, id: "search_form", url: search_detail_items_path do |f|
+        %h3 詳細検索
+        .sort
+          = f.text_field :name_cont, class: "form-control",placeholder: '並び替え'
+        .for-keyword
+          %h4 キーワードを追加する
+          .form-group
+            = f.text_field :name_cont, class: "form-control"
+
+        .category
+          %h4 カテゴリーを選択する
+          = f.text_field :name_cont, class: "form-control"
+          .first
+          .second
+          .third
+        .brand
+          %h4 ブランド名から探す
+          = f.text_field :name_cont, class: "form-control"
+        .size
+          %h4 サイズを指定する
+          = f.text_field :name_cont, class: "form-control"
+        .price
+          %h4 価格
+          = f.text_field :name_cont, class: "form-control"
+          .price__select
+          .price__width
+        / .item-status
+        /   =  f.collection_check_boxes :subjects_id_in, @items.status, :id, :name
+        / .delivery
+        /   = f.search_field :name_cont, class: "form-control"
+        / .item_status
+        /   = f.search_field :name_cont, class: "form-control"
+        .define-boutton
+          %input.next_form{type: "button", value: "クリア"}/
+          =submit_tag '完了'
+    / - @items.each do |item|
+    /   = item.name
