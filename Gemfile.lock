@@ -415,6 +415,7 @@ DEPENDENCIES
   rails (~> 5.0.1)
   rails-controller-testing
   rails-i18n (~> 5.1)
+  ransack
   rb-readline
   rspec-rails
   sass-rails (~> 5.0)
