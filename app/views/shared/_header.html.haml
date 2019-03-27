@@ -13,18 +13,17 @@
           %li.switch
             =link_to("カテゴリーから探す",categories_path,class:'pc-header-nav-root')
             %ul.large-category-wrap
-              -l_category_define
-              -@l_categories.each do |l_category|
+              -@categories.each do |l_category|
                 %li.large-category.hover_red
                   =link_to(l_category.name,category_path(l_category.id))
                   %ul.middle-category-wrap
-                    -m_category_define(l_category)
-                    -@m_categories.each do |m_category|
+                    -children_category_define(l_category)
+                    -@children_categories.each do |m_category|
                       %li.middle-category.hover_grey
                         =link_to(m_category.name,category_path(m_category.id))
                         %ul.small-category-wrap
-                          -s_category_define(m_category)
-                          -@s_categories.each do |s_category|
+                          -children_category_define(m_category)
+                          -@children_categories.each do |s_category|
                             %li.small-category.hover_grey
                               =link_to(s_category.name,category_path(s_category.id))
 
@@ -47,7 +46,8 @@
                   .user-background
                     .user-icon
                       =image_tag(current_user.icon)
-                    %figcaption=current_user.nickname
+                    .user-name
+                      =current_user.nickname
                   %ul.pc-header-mypage-review-listing
                     %li
                       =link_to("評価: #{0}","#")

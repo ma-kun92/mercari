@@ -6,6 +6,8 @@ class ItemsController < ApplicationController
   add_breadcrumb 'メルカリ', :root_path, except: [:index]
   before_action :search_params, only: :search_detail
   def index
+    @pick_up_categories = Category.where(pick_up:1)
+    @pick_up_brands = Brand.where(pick_up:1)
   end
 
   def new
