@@ -19,15 +19,25 @@
   .clearfix{
     clear:both;
   }
+  // バナースライド機能の表示設定
+  .slick-prev{
+    left:50px;
+    z-index:1;
+  }
+  .slick-next{
+    right:50px;
+    z-index:1;
+  }
+  .slick-dots{
+    bottom:15px;
+    margin-bottom:0px;
+  }
   //----------------------------
   background-color:#fff;
   display:block;
   .top-banner{
     &__img-area{
       height:390px;
-      background-repeat: repeat-x;
-      background-image:url(https://www.mercari.com/jp/assets/img/common/jp/top/banner-new-life.jpg);
-      background-position: center;
       &__angle{
         height:90%;
         padding:0 100px;
