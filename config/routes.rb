@@ -23,6 +23,7 @@ Rails.application.routes.draw do
       end
     end
     collection do
+      get 'search_detail'
       get 'search'
     end
   end

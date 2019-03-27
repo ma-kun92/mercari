@@ -4,7 +4,7 @@ class ItemsController < ApplicationController
   before_action :set_js_params,only: [:new,:edit]
   before_action :move_to_index,only: [:new,:edit]
   add_breadcrumb 'メルカリ', :root_path, except: [:index]
-
+  before_action :search_params, only: :search_detail
   def index
     @pick_up_categories = Category.where(pick_up:1)
     @pick_up_brands = Brand.where(pick_up:1)
@@ -40,8 +40,21 @@ class ItemsController < ApplicationController
   def image
   end
 
+  def search_detail
+    if search_params
+      @q = Item.search(search_params)
+      @items = @q.result(distinct: true)
+      render templete: 'search'
+    else
+      @q = Item.ransack(params[:q])
+      @items = @q.result(distinct: true)
+    end
+  end
+
   def search
     @items = Item.where('name LIKE(?)',"%#{params[:keyword]}%")
+    @query = Item.ransack(params[:q])
+
   end
 
   def destroy
@@ -93,6 +106,11 @@ class ItemsController < ApplicationController
 
   def move_to_index
     redirect_to action: :index unless user_signed_in?
+  end
+
+  def search_params
+    binding.pry
+    params.require(:q).permit!
   end
 
 end
