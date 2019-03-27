@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
   before_action :header_menu,only: [:index,:edit,:index,:logout]
-  before_action :authenticate_user!, only: :index
   add_breadcrumb 'メルカリ', :root_path
   add_breadcrumb 'マイページ', :users_path
+  before_action :authenticate_user!, only: [:index, :edit, :logout]
 
   def index
   end

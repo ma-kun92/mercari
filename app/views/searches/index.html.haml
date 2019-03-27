@@ -1,0 +1,34 @@
+/ 左側の詳細検索
+= search_form_for @query, id: "search_form", url: searches_path do |f|
+  .form-group
+    = f.search_field :name_cont, class: "form-control"
+  .actions
+    = f.submit "Search"
+  %table.m-t-30
+    %tr
+      %th = "タイトル"
+    / %tbody#search_check
+    /   - @articles.each do |article|
+    /     %tr
+    /       %td
+    /         = link_to edit_dashboard_path(article.id), class: 'text-link' do
+    /           = article.title
+- @items.each do |item|
+  = item.name
+/ メイン右部分
+
+- @items.each do |item|
+  =link_to item_path(item.id),class:'search-item-card' do
+    .item-card__image
+      =image_tag(item.item_images[0].image)
+    .item-card__information
+      .item-card__information__name=item.name
+      .item-card__information__detail
+        .price="¥#{item.price.to_s(:delimited)}"
+        -# like機能実装次第追加する
+        .likes
+          =fa_icon("heart-o")
+          15
+        .clearfix
+        .tax (税込)
+
