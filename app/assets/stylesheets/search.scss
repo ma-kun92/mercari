@@ -6,7 +6,12 @@
     width: 280px;
     box-sizing: border-box;
     float: left;
-    margin-top: 80px;
+    margin: 80px 0;
+    &:after{
+      content: "";
+      clear: both;
+      display: block;
+    }
     &__box{
       .sort{
         height: 80px;
@@ -79,6 +84,11 @@
   .search-item-box{
     width: 700px;
     float: right;
+    &:after{
+      content: "";
+      clear: both;
+      display: block;
+    }
     .search-item-card{
       background:#ffffff;
       width:160px;
@@ -125,4 +135,8 @@
       }
     }
   }
+}
+.search-footer{
+  margin-top: 50px;
+  clear: both;
 }
