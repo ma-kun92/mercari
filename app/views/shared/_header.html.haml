@@ -18,12 +18,12 @@
                   =link_to(l_category.name,category_path(l_category.id))
                   %ul.middle-category-wrap
                     -children_category_define(l_category)
-                    -@categories.each do |m_category|
+                    -@children_categories.each do |m_category|
                       %li.middle-category.hover_grey
                         =link_to(m_category.name,category_path(m_category.id))
                         %ul.small-category-wrap
                           -children_category_define(m_category)
-                          -@categories.each do |s_category|
+                          -@children_categories.each do |s_category|
                             %li.small-category.hover_grey
                               =link_to(s_category.name,category_path(s_category.id))
 
