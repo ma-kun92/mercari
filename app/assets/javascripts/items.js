@@ -37,4 +37,11 @@ $(function(){
     plus_menu.css('display','none');
     $(this).css('background','#fff');
   });
+
+  $('.slider_banner').slick({
+    arrows:true,
+    autoplay:true,
+    focusOnSelect:true,
+    dots:true,
+  });
 });

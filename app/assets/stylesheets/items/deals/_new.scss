@@ -27,7 +27,7 @@
         max-height: 500px;
         margin: 0 auto;
         &--image{
-          width:40%;
+          width:50%;
           margin:0 auto;
           img{
             width:100%;
@@ -108,7 +108,7 @@
         background-color:$darkgray;
       }
     }
-    &__address{
+    &__vendor{
       @include border-box;
       padding: 30px 25% 50px 25%;
       margin: 0 auto;
@@ -117,7 +117,16 @@
         h3{
           @include buy-h3;
         }
-        address{
+        &--post_number{
+          font-size:0.8em;
+        }
+        &--address{
+          font-size:0.8em;
+        }
+        &--nickname{
+          font-size:0.8em;
+        }
+        &--none{
           font-size:0.8em;
         }
       }

@@ -1,3 +1,5 @@
+require 'active_support/concern'
+
 module CardsActions
   extend ActiveSupport::Concern
 
@@ -23,8 +25,8 @@ module CardsActions
 
   private
   def prepare_payjp
-    gon.payjp_pk_key = ENV["PAYJP_PK_TEST"]
-    Payjp.api_key = ENV["PAYJP_SK_TEST"]
+    gon.payjp_pk_key =Rails.application.secrets.pay_pk_test
+    Payjp.api_key =Rails.application.secrets.pay_sk_test
     unless current_user.payjp_id
       current_user.payjp_id = Payjp::Customer.create(description: 'test').id
       current_user.save

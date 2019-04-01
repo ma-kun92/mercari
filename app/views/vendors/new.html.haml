@@ -21,6 +21,10 @@
         発送元・お届け住所入力
     .shipping-main__content
       = form_for @vendor ,url: vendor_path do |f|
+        .error-box
+          - @vendor.errors.full_messages.each do |message|
+            .form-error
+              = message
         %br
         =f.label :family_name, 'お名前'
         %span 必須

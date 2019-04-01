@@ -11,15 +11,7 @@ module ItemsHelper
     end
   end
 
-  def l_category_define
-    @l_categories = Category.roots
+  def children_category_define(parent_category)
+    @children_categories = Category.children_of(parent_category)
   end
-  def m_category_define(l)
-    @m_categories = Category.children_of(l)
-  end
-  def s_category_define(m)
-    @s_categories = Category.children_of(m)
-  end
-
-
 end

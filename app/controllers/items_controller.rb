@@ -3,14 +3,17 @@ class ItemsController < ApplicationController
   before_action :set_item,only: [:show,:update,:edit]
   before_action :set_js_params,only: [:new,:edit]
   before_action :move_to_index,only: [:new,:edit]
+  before_action :search_params, only: :search_detail
+  add_breadcrumb 'メルカリ', :root_path, except: [:index]
 
   def index
+    @pick_up_categories = Category.where(pick_up:1)
+    @pick_up_brands = Brand.where(pick_up:1)
   end
 
   def new
     @item = Item.new
     @item.item_images.build
-    gon.image = @item.item_images
   end
 
   def create
@@ -32,6 +35,7 @@ class ItemsController < ApplicationController
     sold_item = Deal.pluck('item_id')
     @vendor_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
     @brand_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(brand:@item.brand).order(id: :DESC).limit(6)
+    add_breadcrumb @item.name, "items/#{@item.id}"
   end
 
   def image
@@ -39,6 +43,18 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.where('name LIKE(?)',"%#{params[:keyword]}%")
+    @query = Item.ransack(params[:q])
+  end
+
+  def search_detail
+    if search_params
+      @q = Item.search(search_params)
+      @items = @q.result(distinct: true)
+      render templete: 'search'
+    else
+      @q = Item.ransack(params[:q])
+      @items = @q.result(distinct: true)
+    end
   end
 
   def destroy
@@ -69,6 +85,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.require(:q).permit!
+  end
 
   def item_params
     params.require(:item).permit(:name,:description,:price,:condition,:shipping_fee,:shipping_date,:shipping_method,:prefecture_id,:size_id,:category_id,:brand,item_images_attributes: [:image]).merge(vendor_id: current_user.id)

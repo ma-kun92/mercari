@@ -15,19 +15,12 @@
   img{
     vertical-align: middle;
   }
-  .text-center{
-    text-align:center;
-}
-  .clearfix{
-    clear:both;
-  }
-
-
   .inner{
     width:1020px;
     margin: 0 auto;
     padding: 8px 0 0;
-    .clearfix{
+    .pc-header-search-box{
+      @include clearfix;
       .l-left{
         float:left;
         a{
@@ -46,7 +39,7 @@
           padding:9px 32px 9px 8px;
           background: #fafafa;
           border-radius:4px;
-          transition:all;           // コレ何？？
+          transition:all;
         }
         .icon-search{
           position:absolute;
@@ -62,6 +55,7 @@
     }
     .pc-header-nav-box{
       margin:8px 0 0;
+      @include clearfix;
       .l-left{
         float:left;
         height: 40px;
@@ -173,19 +167,20 @@
                   background-size:320px 80px;
                   .user-icon{
                     img{
+                      display:block;
+                      margin:0 auto;
                       border-radius:30px;
                       width:60px;
                     }
                   }
-                  figcaption{
-                    margin:8px 0 0;
-                    padding:0 8px;
+                  .user-name{
+                    margin:8px auto;
+                    text-align:center;
                     font-size:16px;
                   }
                 }
                 .pc-header-mypage-review-listing{
-                  padding:8px 8px 0;
-                  font-size:0;
+                  margin:20px 8px 0;
                   text-align:center;
                   li{
                     display:inline-block;
@@ -289,9 +284,30 @@
             margin:10px 10px;
             color:rgb(0,153,232);
           }
-
         }
       }
+    }
+  }
+}
+.bread-crumbs{
+  border-top:$border;
+  background-color: white;
+  position: relative;
+  z-index: 1000;
+  @include box-shadow;
+  &__main{
+    width: 1020px;
+    line-height: 48px;
+    margin: 0 auto;
+    font-size: 14px;
+    color:#333;
+    a{
+      height: 48px;
+      color:#333;
+      text-decoration: none;
+    }
+    a:hover{
+      text-decoration: underline;
     }
   }
 }

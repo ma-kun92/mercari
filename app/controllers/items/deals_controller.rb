@@ -2,14 +2,14 @@ class Items::DealsController < ApplicationController
   include CardsActions
   before_action :authenticate_user!
   before_action :prepare_payjp
-  before_action :set_item
-  before_action :set_address
+  before_action :set_item_and_image
+  before_action :set_vendor
 
   def new
   end
 
   def create
-    charge = Payjp::Charge.create(amount: @item.price, customer: @customer, currency: 'jpy') if @card && @address
+    charge = Payjp::Charge.create(amount: @item.price, customer: @customer, currency: 'jpy') if @card && @vendor
     if charge.paid
       Deal.create(status: :paid, user_id: current_user.id, item_id: params[:item_id])
       # @item.update(user_id: current_user.id) itemも更新する仕様なら追加
@@ -25,12 +25,13 @@ class Items::DealsController < ApplicationController
   end
 
   private
-  def set_item
+  def set_item_and_image
     @item = Item.find(params[:item_id])
+    @image = @item.item_images[0]
   end
 
-  def set_address
-    @address = current_user.street_address
+  def set_vendor
+    @vendor = current_user.vendor
   end
 
 end
