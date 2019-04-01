@@ -29,13 +29,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    add_breadcrumb @item.name, "items/#{@item.id}"
     @images = @item.item_images
     @comment = ItemComment.new
     @comments = @item.item_comments
+    # 下部に表示する出品物の呼び出し（売却済アイテムと、現在詳細表示しているアイテムを除く）
     sold_item = Deal.pluck('item_id')
-    @vendor_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
-    @brand_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(brand:@item.brand).order(id: :DESC).limit(6)
-    add_breadcrumb @item.name, "items/#{@item.id}"
+    @vendor_items = Item.where.not(id:sold_item.push(params[:id])).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
+    @brand_items = Item.where.not(id:sold_item.push(params[:id])).where(brand:@item.brand).order(id: :DESC).limit(6)
   end
 
   def image
