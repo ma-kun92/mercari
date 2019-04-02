@@ -3,6 +3,7 @@ class ItemsController < ApplicationController
   before_action :set_item,only: [:show,:update,:edit]
   before_action :set_js_params,only: [:new,:edit]
   before_action :move_to_index,only: [:new,:edit]
+  before_action :search_params, only: :search_detail
   add_breadcrumb 'メルカリ', :root_path, except: [:index]
 
   def index
@@ -17,7 +18,7 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-      if @item.save
+      if params[:image] && @item.save
         params[:image].each do |image|
           @item.item_images.create(image: image)
       end
@@ -28,13 +29,14 @@ class ItemsController < ApplicationController
   end
 
   def show
+    add_breadcrumb @item.name, "items/#{@item.id}"
     @images = @item.item_images
     @comment = ItemComment.new
     @comments = @item.item_comments
+    # 下部に表示する出品物の呼び出し（売却済アイテムと、現在詳細表示しているアイテムを除く）
     sold_item = Deal.pluck('item_id')
-    @vendor_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
-    @brand_items = Item.where.not('id=? or id=?',params[:id],sold_item).where(brand:@item.brand).order(id: :DESC).limit(6)
-    add_breadcrumb @item.name, "items/#{@item.id}"
+    @vendor_items = Item.where.not(id:sold_item.push(params[:id])).where(vendor_id:@item.vendor_id).order(id: :DESC).limit(6)
+    @brand_items = Item.where.not(id:sold_item.push(params[:id])).where(brand:@item.brand).order(id: :DESC).limit(6)
   end
 
   def image
@@ -42,6 +44,18 @@ class ItemsController < ApplicationController
 
   def search
     @items = Item.where('name LIKE(?)',"%#{params[:keyword]}%")
+    @query = Item.ransack(params[:q])
+  end
+
+  def search_detail
+    if search_params
+      @q = Item.search(search_params)
+      @items = @q.result(distinct: true)
+      render templete: 'search'
+    else
+      @q = Item.ransack(params[:q])
+      @items = @q.result(distinct: true)
+    end
   end
 
   def destroy
@@ -72,6 +86,10 @@ class ItemsController < ApplicationController
   end
 
   private
+
+  def search_params
+    params.require(:q).permit!
+  end
 
   def item_params
     params.require(:item).permit(:name,:description,:price,:condition,:shipping_fee,:shipping_date,:shipping_method,:prefecture_id,:size_id,:category_id,:brand,item_images_attributes: [:image]).merge(vendor_id: current_user.id)

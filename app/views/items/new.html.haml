@@ -38,16 +38,16 @@
               %h3 カテゴリー
               %span 必須
             .select-large
-              = f.collection_select :category_id,Category.roots, :id, :name,{prompt: "---"},{class: "large-category"}
+              = f.collection_select :category_id,Category.roots, :id, :name,{include_blank: true},{class: "large-category"}
             .select-middle
-              = f.select :category_id, {}, {prompt: "---"}, {class: "middle-category"}
+              = f.select :category_id, {}, {include_blank: true, disabled: true}, {class: "middle-category"}
             .select-small
-              = f.select :category_id, {}, {prompt: "---"}, {class: "small-category"}
+              = f.select :category_id, {}, {include_blank: true, disabled: true}, {class: "small-category"}
             .select-size
               .select
                 %h3.size サイズ
                 %span 必須
-              = f.collection_select :size_id, {}, :id, :name,{prompt: "---"},{class: "size-select"}
+              = f.collection_select :size_id, {}, :id, :name,{include_blank: true},{class: "size-select"}
             .select-brand
               .select
                 %h3.brand ブランド
@@ -56,7 +56,7 @@
             .select
               %h3 商品の状態
               %span 必須
-            = f.select :condition,Item.conditions.keys.map { |k| [Item.conditions_i18n[k], k]},prompt: "---"
+            = f.select :condition,Item.conditions.keys.map { |k| [Item.conditions_i18n[k], k]},include_blank: true
       .post-delivery
         .post-delivery-body
           .post-delivery-body__show

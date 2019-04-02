@@ -59,7 +59,7 @@ $(function(){
   function compare(category, value){
     results = category.filter(function(e){
       if (e.ancestry == value){
-      //filterメソッドでresultsにlargeのvalueとmiddleカテのancestryが同じものを代入
+      //filterメソッドでresultsにlargeのvalueとmiddleカテのancestryが同じものを代入, e(element)には現在の要素（選ばれたjqueryObject）が指定されている
         return e
       }
     })
@@ -81,7 +81,7 @@ $(function(){
 
   function small_choices(select_small, large_val, middle_val){
     select_small.empty();
-    select_small.append(`<option>---</option>`)
+    // select_small.append(`<option>---</option>`)
     //smallの定義（ancestry)
     var category_value = `${large_val}/${middle_val}`
     //紐づいたsmall要素だけresultsに代入
@@ -123,6 +123,7 @@ $(function(){
       }
     });
   };
+  //各入力フォーム要素を変数に落とし込んでいる
   var select_large = $('.large-category');
   var select_middle = $('.middle-category');
   var select_small = $('.small-category');
@@ -138,10 +139,13 @@ $(function(){
     // largeが空なら隠しとく
     if ($.isEmptyObject(large_val)){
       middle_box.hide();
+      middle_box.prop("disabled", true);
       } else {
     // 入ってるならmiddle出現
       middle_box.show();
+      middle_box.prop("disabled", false);
     }
+    // フォームで選択されたlargeカテゴリーに紐ずくmiddleカテゴリーが配列の形で変数large_categoryiesに入っている
     var large_results = compare(gon.middle, large_val)
     // largeに紐づくmiddleカテをmiddleboxの選択肢として加える
     middle_choices(large_results,select_middle,select_small);
@@ -157,9 +161,11 @@ $(function(){
     //middleが空なら隠しとく
     if ($.isEmptyObject(middle_val)){
       small_box.hide();
+      small_box.prop("disabled", true);
       } else {
     //入ってたらsmall出現
       small_box.show();
+      small_box.prop("disabled", false);
     }
     small_choices(select_small,large_val, middle_val);
     get_size_type(middle_val,gon.middle);
